@@ -1,26 +1,36 @@
 using UnityEngine;
+using Core.Singleton;
+using System.Collections.Generic;
+using System.Collections;
+using TMPro;
+using DG.Tweening;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
     public Vector2 pastPosition;
     public float velocity = 1f;
     public float speed;
     public string compareTag = "Enemy";
     public GameObject endScreen;
-
+    private float _currentSpeed;
+    public Vector3 _startPosition;
+    public bool invencible = false;
     private bool _canRun;
+    public TextMeshProUGUI uiTextPowerUp;
     void Start()
     {
         /*_canRun = true;*/
         endScreen.SetActive(false);
+
+        _startPosition = transform.position;
+        ResetSpeed();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == compareTag)
         {
-            _canRun = false;
-            endScreen.SetActive(true);
+            if (!invencible) EndGame();
         }
     }
 
@@ -35,9 +45,9 @@ public class Player : MonoBehaviour
 
         pastPosition = Input.mousePosition;
 
+        transform.Translate(transform.forward * _currentSpeed * Time.deltaTime);
 
-
-        transform.Translate(transform.forward * speed * Time.deltaTime);
+        //transform.Translate(transform.forward * speed * Time.deltaTime);
     }
 
     public void Move(float speed)
@@ -48,4 +58,48 @@ public class Player : MonoBehaviour
     {
         _canRun = true;
     }
+    public void EndGame()
+    {
+        _canRun = false;
+        endScreen.SetActive(true);
+    }
+
+
+    public void SetPowerUpText(string s)
+    {
+        uiTextPowerUp.text = s;
+    }
+    public void PowerUpSpeedUp(float f)
+    {
+        _currentSpeed = f;
+    }
+    public void ResetSpeed()
+    {
+        _currentSpeed = speed;
+    }
+    public void SetInvencible(bool b = true)
+    {
+        invencible = b;
+    }
+    public void ChangeHeight(float amount, float duration, float animationDuration, Ease ease)
+    {
+        /*var p = transform.position;
+        p.y = _startPosition.y + amount;
+        transform.position = p;*/
+        transform.DOMoveY(_startPosition.y + amount, animationDuration).SetEase(ease);//.OnComplete(ResetHeight);a        
+        Invoke(nameof(ResetHeight), duration);
+    }
+    public void ResetHeight()
+    {
+        /*var p = transform.position;
+        p.y = _startPosition.y;
+        transform.position = p;*/
+        transform.DOMoveY(_startPosition.y, .1f);
+    }
+
+
+
+
+
+
 }
