@@ -11,6 +11,7 @@ public class Player : Singleton<Player>
     public float velocity = 1f;
     public float speed;
     public string compareTag = "Enemy";
+    public string endTag = "EndLine";
     public GameObject endScreen;
     private float _currentSpeed;
     public Vector3 _startPosition;
@@ -35,6 +36,10 @@ public class Player : Singleton<Player>
         if (collision.transform.tag == compareTag)
         {
             if (!invencible) EndGame();
+        }
+        else if (collision.transform.tag == endTag)
+        {
+            WinGame();
         }
     }
 
@@ -75,6 +80,11 @@ public class Player : Singleton<Player>
         _canRun = false;
         endScreen.SetActive(true);
         animator.SetTrigger(animationDeath);
+    }
+    public void WinGame()
+    {
+        _canRun = false;
+        endScreen.SetActive(true);
     }
 
 
