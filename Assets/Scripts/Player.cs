@@ -17,6 +17,9 @@ public class Player : Singleton<Player>
     public bool invencible = false;
     private bool _canRun;
     public TextMeshProUGUI uiTextPowerUp;
+    public Animator animator;
+    public string animation = "Run";
+    public string animationDeath = "Death";
     void Start()
     {
         /*_canRun = true;*/
@@ -24,6 +27,7 @@ public class Player : Singleton<Player>
 
         _startPosition = transform.position;
         ResetSpeed();
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -36,8 +40,11 @@ public class Player : Singleton<Player>
 
     void Update()
     {
-        if (!_canRun) return;
-
+        Animation();
+        if (!_canRun)
+        {
+            return;
+        }
         if (Input.GetMouseButton(0))
         {
             Move(Input.mousePosition.x - pastPosition.x);
@@ -45,11 +52,16 @@ public class Player : Singleton<Player>
 
         pastPosition = Input.mousePosition;
 
-        transform.Translate(transform.forward * _currentSpeed * Time.deltaTime);
+        transform.Translate(transform.forward * _currentSpeed * Time.deltaTime);        
 
         //transform.Translate(transform.forward * speed * Time.deltaTime);
     }
 
+    public void Animation()
+    {
+        if (_canRun) animator.SetBool(animation, true);
+        else animator.SetBool(animation, false);
+    }
     public void Move(float speed)
     {
         transform.position += Vector3.right * Time.deltaTime * speed * velocity;
@@ -62,6 +74,7 @@ public class Player : Singleton<Player>
     {
         _canRun = false;
         endScreen.SetActive(true);
+        animator.SetTrigger(animationDeath);
     }
 
 
