@@ -8,5 +8,6 @@ public class SOCoins : ScriptableObject
 {
     public int valor;
     
+    
    
 }

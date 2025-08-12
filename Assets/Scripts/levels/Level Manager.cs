@@ -8,17 +8,21 @@ public class LevelManager : Singleton<LevelManager>
 {
     public Transform container;
     public List<GameObject> levels;
+    public List<LevelPiecesSetup> levelPiecesSetup;
 
-    [Header("Pieces")]
+    /*[Header("Pieces")]
     public List<PiecesBase> startlevelPieces;
     public List<PiecesBase> levelPieces;
     public List<PiecesBase> endlevelPieces;
     public int startpiecesNumber = 1;
     public int piecesNumber = 5;
-    public int endpiecesNumber = 1;
+    public int endpiecesNumber = 1;*/
     [SerializeField] public int _index;
     private GameObject _currentLevel;
-    private List<PiecesBase> _SpawnnedPieces;
+    [SerializeField] private List<PiecesBase> _SpawnnedPieces = new List<PiecesBase>();
+
+    private LevelPiecesSetup _currSetup;
+    
 
     private void Awake()
     {
@@ -26,7 +30,7 @@ public class LevelManager : Singleton<LevelManager>
         CreateLevel();
     }
 
-    private void SpawnNextLevel()
+    /*private void SpawnNextLevel()
     {
         if (_currentLevel != null)
         {
@@ -40,7 +44,7 @@ public class LevelManager : Singleton<LevelManager>
 
         _currentLevel = Instantiate(levels[_index], container);
         _currentLevel.transform.localPosition = Vector3.zero;
-    }
+    }*/
 
     private void ResetIndex()
     {
@@ -49,20 +53,32 @@ public class LevelManager : Singleton<LevelManager>
 
     private void CreateLevel()
     {
-        _SpawnnedPieces = new List<PiecesBase>();
-        for (int i = 0; i < startpiecesNumber; i++)
+        if (_currSetup != null)
         {
-            SpawnPieces(startlevelPieces);
+            _index++;
+            if (_index >= levelPiecesSetup.Count)
+            {
+                ResetIndex();
+            }
+        }
+        _currSetup = levelPiecesSetup[_index];
+
+        _SpawnnedPieces = new List<PiecesBase>();
+        for (int i = 0; i < _currSetup.startpiecesNumber; i++)
+        {
+            SpawnPieces(_currSetup.startlevelPieces);
         }
 
-        for (int i = 0; i < piecesNumber; i++)
+        for (int i = 0; i < _currSetup.piecesNumber; i++)
         {
-            SpawnPieces(levelPieces);
+            SpawnPieces(_currSetup.levelPieces);
         }
-        for (int i = 0; i < endpiecesNumber; i++)
+        for (int i = 0; i < _currSetup.endpiecesNumber; i++)
         {
-            SpawnPieces(endlevelPieces);
+            SpawnPieces(_currSetup.endlevelPieces);
         }
+
+        ColorManager.Instance.ChangeColorByType(_currSetup.artType);
     }
 
     private void SpawnPieces(List<PiecesBase> list)
@@ -77,14 +93,19 @@ public class LevelManager : Singleton<LevelManager>
             spawnedPiece.transform.position = lastPiece.endPiece.position;
         }
 
+        foreach (var p in spawnedPiece.GetComponentsInChildren<ArtPiece>())
+        {
+            p.ChangePiece(ArtManager.Instance.GetSetupByType(_currSetup.artType).gameObject);
+        }
+
         _SpawnnedPieces.Add(spawnedPiece);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             SpawnNextLevel();
-        }
+        }*/
     }
 }
