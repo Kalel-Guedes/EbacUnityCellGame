@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4094357974753118209}
   m_Layer: 0
   m_Name: PFB_coin
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   compareTag: Player
-  graphicItem: {fileID: 4444755211393285267}
 --- !u!114 &4306382185637380294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +61,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   compareTag: Player
-  graphicItem: {fileID: 4444755211393285267}
 --- !u!135 &4094357974753118209
 SphereCollider:
   m_ObjectHideFlags: 0

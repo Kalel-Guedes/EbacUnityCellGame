@@ -178,6 +178,7 @@ MonoBehaviour:
   velocity: 1
   speed: 2
   compareTag: Enemy
+  endTag: EndLine
   endScreen: {fileID: 0}
   _startPosition: {x: 0, y: 0, z: 0}
   invencible: 0
@@ -185,6 +186,7 @@ MonoBehaviour:
   animator: {fileID: 1720457631006556917}
   animation: Run
   animationDeath: Death
+  playerArt: {fileID: 0}
 --- !u!1 &5161268004030341915
 GameObject:
   m_ObjectHideFlags: 0

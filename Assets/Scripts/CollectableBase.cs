@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class CollectableBase : MonoBehaviour
 {
     public string compareTag = "Player";
+    
 
    /* public GameObject graphicItem;
-    
-    public ParticleSystem particles;
-    public AudioSource audio;*/
+
+     public ParticleSystem particles;
+     public AudioSource audio;*/
 
 
 
@@ -29,6 +31,8 @@ public class CollectableBase : MonoBehaviour
 
     protected virtual void Collect()
     {
+       
+        
         /*if(graphicItem != null) graphicItem.SetActive(false);*/
         Debug.Log("Collect");
         OnCollect();

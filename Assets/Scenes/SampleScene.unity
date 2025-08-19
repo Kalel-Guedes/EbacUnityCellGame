@@ -383,6 +383,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &294588937 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2874189450942510669, guid: 2ef7a8900bcdf3149b38f9f9a0dcad1a, type: 3}
+  m_PrefabInstance: {fileID: 5867765617164157403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &306499102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1228404251138767883, guid: 2ef7a8900bcdf3149b38f9f9a0dcad1a, type: 3}
@@ -2054,10 +2059,26 @@ PrefabInstance:
       propertyPath: m_enableAutoSizing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3218099832135232759, guid: 2ef7a8900bcdf3149b38f9f9a0dcad1a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218099832135232759, guid: 2ef7a8900bcdf3149b38f9f9a0dcad1a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218099832135232759, guid: 2ef7a8900bcdf3149b38f9f9a0dcad1a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5243300053600163518, guid: 2ef7a8900bcdf3149b38f9f9a0dcad1a, type: 3}
       propertyPath: endScreen
       value: 
       objectReference: {fileID: 1898563999}
+    - target: {fileID: 5243300053600163518, guid: 2ef7a8900bcdf3149b38f9f9a0dcad1a, type: 3}
+      propertyPath: playerArt
+      value: 
+      objectReference: {fileID: 294588937}
     - target: {fileID: 5243300053600163518, guid: 2ef7a8900bcdf3149b38f9f9a0dcad1a, type: 3}
       propertyPath: uiTextPowerUp
       value: 

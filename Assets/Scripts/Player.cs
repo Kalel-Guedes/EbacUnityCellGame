@@ -12,6 +12,7 @@ public class Player : Singleton<Player>
     public float speed;
     public string compareTag = "Enemy";
     public string endTag = "EndLine";
+    public string coinTag = "Coin";
     public GameObject endScreen;
     private float _currentSpeed;
     public Vector3 _startPosition;
@@ -21,10 +22,15 @@ public class Player : Singleton<Player>
     public Animator animator;
     public string animation = "Run";
     public string animationDeath = "Death";
+    public GameObject playerArt;
+    
     void Start()
     {
         /*_canRun = true;*/
         endScreen.SetActive(false);
+
+        
+        
 
         _startPosition = transform.position;
         ResetSpeed();
@@ -40,6 +46,15 @@ public class Player : Singleton<Player>
         else if (collision.transform.tag == endTag)
         {
             WinGame();
+        }
+
+       
+    }
+    private void OnTriggerEnter(Collider collision)
+    {
+         if (collision.transform.tag == coinTag)
+        {
+            playerArt.transform.DOScale(1.1f, .1f).SetEase(Ease.OutBack).SetLoops(2,LoopType.Yoyo);
         }
     }
 
@@ -73,6 +88,7 @@ public class Player : Singleton<Player>
     }
     public void StartRun()
     {
+        playerArt.transform.DOScale(1,1f).SetEase(Ease.OutBack);
         _canRun = true;
     }
     public void EndGame()
@@ -80,6 +96,7 @@ public class Player : Singleton<Player>
         _canRun = false;
         endScreen.SetActive(true);
         animator.SetTrigger(animationDeath);
+        playerArt.transform.DOScale(0,5f).SetEase(Ease.OutBack);
     }
     public void WinGame()
     {
