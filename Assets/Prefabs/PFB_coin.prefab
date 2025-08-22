@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   compareTag: Player
+  graphicItem: {fileID: 4444755211393285267}
+  particles: {fileID: 0}
 --- !u!114 &4306382185637380294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   compareTag: Player
+  graphicItem: {fileID: 4444755211393285267}
+  particles: {fileID: 0}
 --- !u!135 &4094357974753118209
 SphereCollider:
   m_ObjectHideFlags: 0

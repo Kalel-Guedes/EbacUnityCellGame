@@ -23,6 +23,7 @@ public class Player : Singleton<Player>
     public string animation = "Run";
     public string animationDeath = "Death";
     public GameObject playerArt;
+    public ParticleSystem particles;
     
     void Start()
     {
@@ -96,7 +97,8 @@ public class Player : Singleton<Player>
         _canRun = false;
         endScreen.SetActive(true);
         animator.SetTrigger(animationDeath);
-        playerArt.transform.DOScale(0,5f).SetEase(Ease.OutBack);
+        playerArt.transform.DOScale(0, 5f).SetEase(Ease.OutBack);
+        if (particles != null) particles.Play();
     }
     public void WinGame()
     {

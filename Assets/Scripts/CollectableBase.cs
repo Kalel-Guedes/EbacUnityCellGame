@@ -8,10 +8,9 @@ public class CollectableBase : MonoBehaviour
     public string compareTag = "Player";
     
 
-   /* public GameObject graphicItem;
-
-     public ParticleSystem particles;
-     public AudioSource audio;*/
+    public GameObject graphicItem;
+    public ParticleSystem particles;
+    /* public AudioSource audio;*/
 
 
 
@@ -43,8 +42,8 @@ public class CollectableBase : MonoBehaviour
 
     protected virtual void OnCollect()
     {
-        /*if (particles != null) particles.Play();
-        if (audio != null) audio.Play();*/
+        if (particles != null) particles.Play();
+       /* if (audio != null) audio.Play();*/
     }
     
 }
